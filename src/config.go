@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/kinesis"
@@ -79,11 +78,6 @@ func NewConfig() *Config {
 
 	yamlFile, err := ioutil.ReadFile(configPath)
 
-	fmt.Println(string(yamlFile))
-
-
-
-
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}
@@ -91,15 +85,15 @@ func NewConfig() *Config {
 	var envConfig EnvConfig
 	err = yaml.Unmarshal(yamlFile, &envConfig)
 
-	log.Println(envConfig)
-
 	if err != nil {
 		log.Printf("yamlFile unmarshal err   #%+v \n", err)
 	}
 
 	currentConfig := envConfig.GetConfig(env)
-	log.Printf("Config constructed env=%v config=%+v \n", env, currentConfig)
 	currentConfig.Session = session
 	currentConfig.Kinesis = kinesis
+
+	log.Printf("Config constructed env=%v config=%+v \n", env, currentConfig)
+
 	return &currentConfig
 }
