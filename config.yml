@@ -1,0 +1,19 @@
+default: &DEFAULT
+  Host: binlog.ckxthqwwytnf.us-east-1.rds.amazonaws.com
+  Port: 3306
+  User: binlog
+  Password: binlogbinlog
+  IncludeTables:
+    - binlogtest.event
+  Flavor: mysql
+dev:
+  <<: *DEFAULT
+  Env: dev
+stage:
+  <<: *DEFAULT
+  Env: stage
+prod:
+  <<: *DEFAULT
+  Env: prod
+
+
