@@ -33,7 +33,7 @@ func (i *Ingest) Run() {
 
 func getConfig(c *Config) *canal.Config {
 	cfg := canal.NewDefaultConfig()
-	cfg.Addr = fmt.Sprintf("%s:%d", c.Host,c.Port )
+	cfg.Addr = fmt.Sprintf("%s:%d", c.Host, c.Port)
 	cfg.User = c.User
 	cfg.Password = c.Password
 	cfg.Flavor = c.Flavor
@@ -42,10 +42,9 @@ func getConfig(c *Config) *canal.Config {
 	return cfg
 }
 
-
 func NewIngestServer(c *Config, h canal.EventHandler) *Ingest {
 	return &Ingest{
-		Config: c,
+		Config:  c,
 		Handler: h,
 	}
 }

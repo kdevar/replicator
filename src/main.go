@@ -2,7 +2,7 @@ package main
 
 
 
-func main(){
+func main() {
 
 	config := NewConfig()
 	streamer := NewStreamer(config)

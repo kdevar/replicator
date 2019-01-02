@@ -13,6 +13,7 @@ type Handler struct {
 
 func (h *Handler) OnRow(e *canal.RowsEvent) error {
 	m := make(map[string]interface{})
+
 	//revisit possibly memoize or cache
 	for _, r := range e.Rows {
 		for _, c := range e.Table.Columns {
@@ -29,8 +30,8 @@ func (h *Handler) OnRow(e *canal.RowsEvent) error {
 	log.Printf("Packaged item\n%+v", m)
 
 	h.Streamer.Stream(&StreamItem{
-		TableName: e.Table.Name,
-		Data: m,
+		TableName:   e.Table.Schema + "." + e.Table.Name,
+		Data:        m,
 		ProcessTime: time.Now().UTC(),
 	})
 
